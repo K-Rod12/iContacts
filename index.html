@@ -1,41 +1,82 @@
-<html>
-	<head>
-		<title>iContacts</title>
-		<script type = "text/javascript" src = "js/code.js"></script>
-		<link rel = "stylesheet" href = "css/styles.css">
-	</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>iContacts</title>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script type = "text/javascript" src = "js/code.js"></script>
+    <!-- <link rel = "stylesheet" href = "css/styles.css"> -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+    
+    
 
-	<body>
-		<h1 id = "title">
-			<span style = "color: #FF0000">i</span>
-			<span style = "color: green">C</span>
-			<span style = "color: blue">o</span>
-			<span style = "color: pink">n</span>
-			<span style = "color: orange">t</span>
-			<span style = "color: purple">a</span>
-			<span style = "color: hotpink">c</span>
-			<span style = "color: orangered">t</span>
-			<span style = "color: yellow">s</span>
-		</h1>
+    <!-- Bootstrap core CSS -->
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
-		<style>
-			body
-			{
-				background-image: url(images/ipear1.png);
-				background-repeat: no-repeat;
-				background-size: 1000px;
-				background-attachment: fixed;
-				background-position: center;
-			}
-		</style>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
-		<div id="loginDiv">
-			<span id="inner-title"><b>PLEASE LOG IN</b></span>
-			<input type="text" id="loginName" placeholder="Username" /><br />
-			<input type="password" id="loginPassword" placeholder="Password"/><br />
-			<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Enter </button>
-			<span id="loginResult"></span>
-		</div>
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
 
-	</body>
+    
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    
+    <main class="form-signin">
+        <!-- <h1 id = "title">
+            <span style = "color: #FF0000">i</span>
+            <span style = "color: orangered">C</span>
+            <span style = "color: orange">o</span>
+            <span style = "color: yellow">n</span>
+            <span style = "color: green">t</span>
+            <span style = "color: blue">a</span>
+            <span style = "color: purple">c</span>
+            <span style = "color: hotpink">t</span>
+            <span style = "color: pink">s</span>
+        </h1> -->
+        <h1 id = "title">iContacts</h1>
+        <form>
+            <img class="mb-4" src="images/ipear1.png" alt="" width="90" height="57">
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+            <div class="form-floating">
+                <input type="text" class="form-control" id="loginName" placeholder="Username">
+                <label for="text">Username</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                <label for="password">Password</label>
+            </div>
+
+            <!-- <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+            </div> -->
+            <button class="w-100 btn btn-lg btn-primary" type="button" id = "loginButton" onclick="doLogin();">Sign in</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+            <span id="loginResult"></span>
+        </form>
+    </main>
+
+
+    
+  </body>
 </html>

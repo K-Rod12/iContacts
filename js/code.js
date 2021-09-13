@@ -49,6 +49,7 @@ function doLogin()
 				window.location.href = "test.html";
 			}
 		};
+		console.log(jsonPayload);
 		xhr.send(jsonPayload);
 	}
 	catch(err)
@@ -108,78 +109,78 @@ function doLogout()
 	window.location.href = "index.html";
 }
 
-// function addColor()
-// {
-// 	var newColor = document.getElementById("colorText").value;
-// 	document.getElementById("colorAddResult").innerHTML = "";
+function addColor()
+{
+	var newColor = document.getElementById("colorText").value;
+	document.getElementById("colorAddResult").innerHTML = "";
 
-// 	var tmp = {color:newColor,userId,userId};
-// 	var jsonPayload = JSON.stringify( tmp );
+	var tmp = {color:newColor,userId,userId};
+	var jsonPayload = JSON.stringify( tmp );
 
-// 	var url = urlBase + '/AddColor.' + extension;
+	var url = urlBase + '/AddColor.' + extension;
 	
-// 	var xhr = new XMLHttpRequest();
-// 	xhr.open("POST", url, true);
-// 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-// 	try
-// 	{
-// 		xhr.onreadystatechange = function() 
-// 		{
-// 			if (this.readyState == 4 && this.status == 200) 
-// 			{
-// 				document.getElementById("colorAddResult").innerHTML = "Color has been added";
-// 			}
-// 		};
-// 		xhr.send(jsonPayload);
-// 	}
-// 	catch(err)
-// 	{
-// 		document.getElementById("colorAddResult").innerHTML = err.message;
-// 	}
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				document.getElementById("colorAddResult").innerHTML = "Color has been added";
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("colorAddResult").innerHTML = err.message;
+	}
 	
-// }
+}
 
-// function searchColor()
-// {
-// 	var srch = document.getElementById("searchText").value;
-// 	document.getElementById("colorSearchResult").innerHTML = "";
+function searchColor()
+{
+	var srch = document.getElementById("searchText").value;
+	document.getElementById("colorSearchResult").innerHTML = "";
 	
-// 	var colorList = "";
+	var colorList = "";
 
-// 	var tmp = {search:srch,userId:userId};
-// 	var jsonPayload = JSON.stringify( tmp );
+	var tmp = {search:srch,userId:userId};
+	var jsonPayload = JSON.stringify( tmp );
 
-// 	var url = urlBase + '/SearchColors.' + extension;
+	var url = urlBase + '/SearchColors.' + extension;
 	
-// 	var xhr = new XMLHttpRequest();
-// 	xhr.open("POST", url, true);
-// 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-// 	try
-// 	{
-// 		xhr.onreadystatechange = function() 
-// 		{
-// 			if (this.readyState == 4 && this.status == 200) 
-// 			{
-// 				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
-// 				var jsonObject = JSON.parse( xhr.responseText );
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
+				var jsonObject = JSON.parse( xhr.responseText );
 				
-// 				for( var i=0; i<jsonObject.results.length; i++ )
-// 				{
-// 					colorList += jsonObject.results[i];
-// 					if( i < jsonObject.results.length - 1 )
-// 					{
-// 						colorList += "<br />\r\n";
-// 					}
-// 				}
+				for( var i=0; i<jsonObject.results.length; i++ )
+				{
+					colorList += jsonObject.results[i];
+					if( i < jsonObject.results.length - 1 )
+					{
+						colorList += "<br />\r\n";
+					}
+				}
 				
-// 				document.getElementsByTagName("p")[0].innerHTML = colorList;
-// 			}
-// 		};
-// 		xhr.send(jsonPayload);
-// 	}
-// 	catch(err)
-// 	{
-// 		document.getElementById("colorSearchResult").innerHTML = err.message;
-// 	}
+				document.getElementsByTagName("p")[0].innerHTML = colorList;
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("colorSearchResult").innerHTML = err.message;
+	}
 	
-// }
+}
