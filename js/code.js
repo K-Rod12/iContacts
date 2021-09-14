@@ -46,7 +46,7 @@ function doLogin()
 
 				saveCookie();
 	
-				window.location.href = "test.html";
+				window.location.href = "contacts.html";
 			}
 		};
 		console.log(jsonPayload);
@@ -109,7 +109,7 @@ function doLogout()
 	window.location.href = "index.html";
 }
 
-function addColor()
+function addContact()
 {
 	var newColor = document.getElementById("colorText").value;
 	document.getElementById("colorAddResult").innerHTML = "";
@@ -117,7 +117,7 @@ function addColor()
 	var tmp = {color:newColor,userId,userId};
 	var jsonPayload = JSON.stringify( tmp );
 
-	var url = urlBase + '/AddColor.' + extension;
+	var url = urlBase + '/AddContact.' + extension;
 	
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
