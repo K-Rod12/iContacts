@@ -43,11 +43,11 @@ function doLogin()
 		
 				firstName = jsonObject.firstName;
 				lastName = jsonObject.lastName;
-				console.log(firstName + ' ' + lastName);
+				console.log(jsonObject);
 
 				saveCookie();
 	
-				window.location.href = "contacts.html";
+				//window.location.href = "contacts.html";
 			}
 		};
 		console.log(jsonPayload);
