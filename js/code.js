@@ -48,6 +48,8 @@ function doLogin()
 				saveCookie();
 	
 				window.location.href = "contacts.html";
+				
+				$('.dropdown-toggle').append(login)
 			}
 		};
 		console.log(jsonPayload);
