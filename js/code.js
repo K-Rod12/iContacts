@@ -1,3 +1,4 @@
+
 var urlBase = 'http://icontacts.zapto.org/LAMPAPI';
 var extension = 'php';
 
@@ -48,6 +49,8 @@ function doLogin()
 				saveCookie();
 	
 				window.location.href = "contacts.html";
+
+				$('.dropdown-toggle').append(login)
 			}
 		};
 		console.log(jsonPayload);
