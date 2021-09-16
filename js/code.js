@@ -47,7 +47,7 @@ function doLogin()
 
 				saveCookie();
 	
-				//window.location.href = "contacts.html";
+				window.location.href = "contacts.html";
 			}
 		};
 		console.log(jsonPayload);
@@ -58,6 +58,26 @@ function doLogin()
 		document.getElementById("loginResult").innerHTML = err.message;
 	}
 
+}
+
+function test()
+{	
+	var test = "";
+
+	for(var i = 0; i < 10; i++){
+
+		test  = test + '<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">'
+		+'<div class="d-flex w-100 align-items-center justify-content-between">'
+		+'<strong class="mb-1">List group item heading</strong>'
+		+'<small>Wed</small>'
+		+'</div>'
+		+'<div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>'
+		+'</a>'
+	}
+
+	$('#contactList').empty();
+	$('#contactList').append(test);
+	//$('#contactList').modal('show')
 }
 
 function saveCookie()
