@@ -61,6 +61,71 @@ function doLogin()
 
 }
 
+function addContact(){
+
+	userId = 0;
+	
+
+	var firstName = $("#firstName").val() // Gets the first name from register fields
+	var lastName = $("#lastName").val() //Gets the last name from register fields
+	var email = $("#email").val() //gets the username from register fields
+   	var phoneNumber =  $("#phone").val() //gets the password from register field
+	// var firstName = document.getElementById("firstName").value;
+	// var lastName = document.getElementById("lastName").value;
+	// var userName = document.getElementById("username").value;
+	// var password = document.getElementById("password").value;
+	//	var hash = md5( password );
+	
+	// prompt user to add a first and last name to appropriate fields
+	if(userName == "" || password == "") { 
+		createAlert("Username and password are required","danger",".errorBar")
+		return;
+	}
+
+	var tmp = {FirstName:firstName,LastName:lastName,Email:email,PhoneNumber:phoneNumber};
+
+	console.log('hit here')
+
+//	var tmp = {login:login,password:hash};
+	var jsonPayload = JSON.stringify( tmp );
+	console.log(jsonPayload)
+	
+	var url = urlBase + '/AddContact.' + extension;
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var jsonObject = JSON.parse( xhr.responseText );
+
+
+				if(jsonObject.error == "This contact already exists."){
+					createAlert("This Contact Already Exists","danger",".errorBar")
+					return;
+				}
+
+				//console.log(jsonPayload);
+
+
+			}
+		};
+		console.log(jsonPayload);
+		xhr.send(jsonPayload);
+		console.log('Succes?')
+	}
+	catch(err)
+	{
+		console.log("Don't want to hit here");
+		document.getElementById("loginResult").innerHTML = err.message;
+	}
+
+}
+
 
 function createAccount(){
 
