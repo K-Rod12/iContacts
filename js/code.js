@@ -63,6 +63,7 @@ function doLogin()
 function addContact(){
 	
 
+	userId = 15;
 	var firstName = $("#firstName").val() // Gets the first name from register fields
 	var lastName = $("#lastName").val() //Gets the last name from register fields
 	var email = $("#email").val() //gets the username from register fields
@@ -121,6 +122,7 @@ function addContact(){
 
 
 function createAccount(){
+
 
 	var firstName = $("#firstName").val() // Gets the first name from register fields
 	var lastName = $("#lastName").val() //Gets the last name from register fields
