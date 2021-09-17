@@ -143,11 +143,10 @@
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="images/person.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <var id ="login-name"></var>
-        <script>function printLoginName(){
-          var loginName = document.getElementById("loginName").value;
-          document.write(loginName);
-        }</script>
+        <span id = "username"></span>
+        <script src = "js/code.js"> 
+          let username = document.getElementById("loginName").innerHTML;
+        </script>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
         <li><a class="dropdown-item" href="">Setings</a></li>
