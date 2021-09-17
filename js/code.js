@@ -83,7 +83,7 @@ function createAccount(){
 
 	var tmp = {FirstName:firstName,LastName:lastName, Login:userName, Password:password};
 
-	console.log(tmp)
+	console.log('hit here')
 
 //	var tmp = {login:login,password:hash};
 	var jsonPayload = JSON.stringify( tmp );
