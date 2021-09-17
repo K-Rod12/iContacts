@@ -103,14 +103,15 @@ function createAccount(){
 					return;
 				}
 
-				console.log(jsonObject);
+				//console.log(jsonPayload);
 	
-				//window.location.href = "index.html";
+				//window.location.href = "/index.html";
 
 			}
 		};
 		console.log(jsonPayload);
 		xhr.send(jsonPayload);
+		console.log('Succes?')
 	}
 	catch(err)
 	{
