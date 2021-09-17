@@ -126,10 +126,6 @@ function createAccount(){
 
 }
 
-function createAccount(){
-	window.location.href = "createAccount.html";
-}
-
 function test()
 {	
 	var test = "";
