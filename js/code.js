@@ -63,6 +63,61 @@ function doLogin()
 
 }
 
+
+function addAccount(){
+
+	userId = 0;
+	
+	var firstName = document.getElementById("firstName").value;
+	var lastName = document.getElementById("lastName").value;
+	var userName = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+//	var hash = md5( password );
+	
+	if(contactFirstName == "" || contactLastName == "") { //Need to provide a first and last name
+		createAlert("First and Last name are required fields","danger",".errorBar")
+		return;
+	}
+
+	var tmp = {firstName:firstName,lastName:lastName, login:userName, password:password};
+//	var tmp = {login:login,password:hash};
+	var jsonPayload = JSON.stringify( tmp );
+	
+	var url = urlBase + '/AddContact.' + extension;
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var jsonObject = JSON.parse( xhr.responseText );
+
+
+				if(JSONObject.error == "This contact already exists."){
+					createAlert("This Contact Already Exists","danger",".errorBar")
+					return;
+				}
+
+				console.log(jsonObject);
+	
+				window.location.href = "index.html";
+
+			}
+		};
+		console.log(jsonPayload);
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("loginResult").innerHTML = err.message;
+	}
+
+}
+
 function createAccount(){
 	window.location.href = "createAccount.html";
 }
