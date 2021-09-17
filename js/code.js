@@ -80,8 +80,8 @@ function createAccount(){
 	//	var hash = md5( password );
 	
 	// prompt user to add a first and last name to appropriate fields
-	if(contactFirstName == "" || contactLastName == "") { 
-		createAlert("First and Last name are required","danger",".errorBar")
+	if(userName == "" || password == "") { 
+		createAlert("Username and password are required","danger",".errorBar")
 		return;
 	}
 
