@@ -264,37 +264,6 @@ function doLogout()
 	window.location.href = "index.html";
 }
 
-function addContact()
-{
-	var newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
-
-	var tmp = {color:newColor,userId,userId};
-	var jsonPayload = JSON.stringify( tmp );
-
-	var url = urlBase + '/AddContact.' + extension;
-	
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
-	}
-	
-}
-
 function searchColor()
 {
 	var srch = document.getElementById("searchText").value;
