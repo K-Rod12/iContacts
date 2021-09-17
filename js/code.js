@@ -68,10 +68,15 @@ function createAccount(){
 
 	userId = 0;
 	
-	var firstName = document.getElementById("firstName").value;
-	var lastName = document.getElementById("lastName").value;
-	var userName = document.getElementById("username").value;
-	var password = document.getElementById("password").value;
+
+	var firstName = $("#firstName").val() // Gets the first name from register fields
+	var lastName = $("#lastName").val() //Gets the last name from register fields
+	var userName = $("#userName").val() //gets the username from register fields
+   	var password =  $("#password").val() //gets the password from register field
+	// var firstName = document.getElementById("firstName").value;
+	// var lastName = document.getElementById("lastName").value;
+	// var userName = document.getElementById("username").value;
+	// var password = document.getElementById("password").value;
 	//	var hash = md5( password );
 	
 	// prompt user to add a first and last name to appropriate fields
