@@ -237,14 +237,16 @@ function readCookie()
 		}
 	}
 	
+	console.log(userId)
+
 	if( userId < 0 )
 	{
 		window.location.href = "index.html";
 	}
-	else
-	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
-	}
+	// else
+	// {
+	// 	document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+	// }
 }
 
 function doLogout()
