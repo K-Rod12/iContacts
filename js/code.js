@@ -76,11 +76,7 @@ function addContact(){
 	// var password = document.getElementById("password").value;
 	//	var hash = md5( password );
 	
-	// prompt user to add a first and last name to appropriate fields
-	if(userName == "" || password == "") { 
-		createAlert("Username and password are required","danger",".errorBar")
-		return;
-	}
+
 
 	var tmp = {FirstName:firstName,LastName:lastName,Email:email,PhoneNumber:phoneNumber};
 
