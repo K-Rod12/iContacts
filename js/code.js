@@ -78,7 +78,7 @@ function addContact(){
 	
 
 
-	var tmp = {FirstName:firstName,LastName:lastName,Email:email,PhoneNumber:phoneNumber};
+	var tmp = {userId:userId,FirstName:firstName,LastName:lastName,Email:email,PhoneNumber:phoneNumber};
 
 	console.log('hit here')
 
