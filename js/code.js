@@ -72,14 +72,15 @@ function addAccount(){
 	var lastName = document.getElementById("lastName").value;
 	var userName = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
-//	var hash = md5( password );
+	//	var hash = md5( password );
 	
-	if(contactFirstName == "" || contactLastName == "") { //Need to provide a first and last name
-		createAlert("First and Last name are required fields","danger",".errorBar")
+	// prompt user to add a first and last name to appropriate fields
+	if(contactFirstName == "" || contactLastName == "") { 
+		createAlert("First and Last name are required","danger",".errorBar")
 		return;
 	}
 
-	var tmp = {firstName:firstName,lastName:lastName, login:userName, password:password};
+	var tmp = {FirstName:firstName,LastName:lastName, Login:userName, Password:password};
 //	var tmp = {login:login,password:hash};
 	var jsonPayload = JSON.stringify( tmp );
 	
