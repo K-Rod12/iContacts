@@ -14,8 +14,6 @@
 	}
 	else
 	{
-		//$stmt = $conn->prepare("SELECT * FROM Users WHERE FirstName LIKE ? AND LastName LIKE ? AND Email LIKE ? AND PhoneNumber LIKE ? AND UserID=?");
-		//$stmt->bind_param("sssss", $search, $search, $search, $search, $id);
 		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (FirstName LIKE ? OR LastName LIKE ?) AND UserID=?");
 		$stmt->bind_param("sss", $search, $search, $id);
 		$stmt->execute();
@@ -33,7 +31,7 @@
 			//$searchResults .= '"'.$row["FirstName"].','.$row["LastName"].','.$row["Email"].','.$row["PhoneNumber"].'"';
 
 			// line below CAN be parsed as JSON
-			$searchResults .= '{"FirstName":"'.$row["FirstName"].'","LastName":"'.$row["LastName"].'","PhoneNumber":"'.$row["PhoneNumber"].'"}';
+			$searchResults .= '{"FirstName":"'.$row["FirstName"].'","LastName":"'.$row["LastName"].'","PhoneNumber":"'.$row["PhoneNumber"].'","Email":"'.$row["Email"].'"}';
 
 			// And with Email included in the line below, we CANNOT parse the results as JSON
 			//$searchResults .= '{"FirstName":"'.$row["FirstName"].'","LastName":"'.$row["LastName"].'","Email":"'.$row["Email"].'"}';
@@ -62,7 +60,9 @@
 	function sendResultInfoAsJson( $obj )
 	{
 		header('Content-type: application/json');
-		echo $obj;
+		// This line below supposedly returns a valid json string
+		$res = json_encode($obj);
+		echo $res;
 	}
 
 	function returnWithError( $err )
