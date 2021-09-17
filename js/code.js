@@ -112,7 +112,7 @@ function addContact(){
 		};
 		console.log(jsonPayload);
 		xhr.send(jsonPayload);
-		console.log('Succes?')
+		console.log('Success?')
 	}
 	catch(err)
 	{

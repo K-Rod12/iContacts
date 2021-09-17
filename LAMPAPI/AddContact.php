@@ -18,7 +18,7 @@
 	else // if connection succeeds
 	{
 		// Below, we prepare the SQL command
-		$stmt = $conn->prepare("INSERT into Contacts (UserId,FirstName,LastName,Email,PhoneNumber) VALUES(?,?,?,?,?)");
+		$stmt = $conn->prepare("INSERT into Contacts (userId,FirstName,LastName,Email,PhoneNumber) VALUES(?,?,?,?,?)");
 		// Below, we bind our "variables" or parameters to the SQL query
 		$stmt->bind_param("sssss", $userId, $FirstName, $LastName, $Email, $PhoneNumber);
 		// The only question I have about the above line, is whether PhoneNumber
