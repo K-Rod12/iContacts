@@ -386,7 +386,7 @@ function searchContacts()
 				var jsonObject = JSON.parse( xhr.responseText );
 				console.log(jsonObject)
 				
-				for( var i=0; i<jsonObject.results.length; i++ )
+				for( var i=0; i<2; i++ )
 				{
 					// contactList += jsonObject.results[i];
 					// if( i < jsonObject.results.length - 1 )
