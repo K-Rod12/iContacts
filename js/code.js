@@ -2,6 +2,7 @@
 var urlBase = 'http://icontacts.zapto.org/LAMPAPI';
 var extension = 'php';
 
+var flag = 0;
 var userId = 0;
 var firstName = "";
 var lastName = "";
@@ -356,8 +357,11 @@ function doLogout()
 	window.location.href = "index.html";
 }
 
+
 function searchContacts()
 {
+	console.log('you are in this function');
+	document.getElementById("searchText").innerHTML = "";
 	var srch = document.getElementById("searchText").value;
 	//document.getElementById("colorSearchResult").innerHTML = "";
 	
@@ -386,7 +390,7 @@ function searchContacts()
 				var jsonObject = JSON.parse( xhr.responseText );
 				console.log(jsonObject)
 				
-				for( var i=0; i<2; i++ )
+				for( var i=0; i<jsonObject.results.length; i++ )
 				{
 					// contactList += jsonObject.results[i];
 					// if( i < jsonObject.results.length - 1 )
@@ -394,7 +398,7 @@ function searchContacts()
 					// 	contactList += "<br />\r\n";
 					// }
 
-					contactList += + '<a href="" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">'
+					contactList = contactList + '<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">'
 					+'<div class="d-flex w-100 align-items-center justify-content-between">'
 					+'<strong class="mb-1">' + jsonObject.results[i].FirstName + '</strong>'
 					+'<small>Wed</small>'
@@ -404,14 +408,15 @@ function searchContacts()
 				}
 
 				
+				//$('#contactList').append(contactList);
+				if(flag >0  ){
+				}
 				$('#contactList').empty();
 				$('#contactList').append(contactList);
-
+				flag++;
 				//document.getElementsByTagName("p")[0].innerHTML = colorList;
 			}
 		};
-		$('#contactList').empty();
-		$('#contactList').append(contactList);
 		xhr.send(jsonPayload);
 	}
 	catch(err)

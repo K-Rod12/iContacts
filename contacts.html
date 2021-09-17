@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
     
+    
 
     <!-- Bootstrap core CSS -->
 <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -163,19 +164,11 @@
       <img src="images/ipear1.png" alt="iContacts Logo" width="70" height="40">
       <span class="fs-5 fw-semibold">List Contacts</span>
     </a>
-    <div class="list-group list-group-flush border-bottom scrollarea" id=contactList>
-      <input type="searchText" class="form-control rounded-4" id="searchText" placeholder="Search Contact(s)" onkeyup="searchContacts();">
-            
-      <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-        <div class="d-flex w-100 align-items-center justify-content-between">
-          <strong class="mb-1">
-            Place contact name here
-            <!-- <script>
 
-            </script> -->
-          </strong>
-        </div>
-      </a>
+    <input type="searchText" class="form-control rounded-4" id="searchText" placeholder="Search Contact(s)" onkeyup="searchContacts();">
+    <div class="list-group list-group-flush border-bottom scrollarea" id=contactList>
+        <!-- <p id="searchText"> </p> -->
+         <script>searchContacts()</script>
     </div>
   </div>
 
