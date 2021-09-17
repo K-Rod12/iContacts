@@ -80,9 +80,14 @@ function createAccount(){
 		return;
 	}
 
+
 	var tmp = {FirstName:firstName,LastName:lastName, Login:userName, Password:password};
+
+	console.log(tmp)
+
 //	var tmp = {login:login,password:hash};
 	var jsonPayload = JSON.stringify( tmp );
+	console.log(jsonPayload)
 	
 	var url = urlBase + '/CreateAccount.' + extension;
 
