@@ -10,7 +10,7 @@
     <script type = "text/javascript" src = "js/code.js"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
-    
+    <!-- <link href="css/signin.css" rel="stylesheet"> -->
 
     <!-- Bootstrap core CSS -->
 <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -115,7 +115,7 @@
         </a>
       </li>
       <li>
-        <a href="addContact.html" class="nav-link text-white">
+        <a href="#" class="nav-link text-white">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#plus"/></svg>
           Add Contact
         </a>
@@ -133,7 +133,7 @@
         </a>
       </li>
       <li>
-        <a href="deleteContact" class="nav-link text-white">
+        <a href="deleteContact.html" class="nav-link text-white">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#delete"/></svg>
           Delete Contacts
         </a>
@@ -182,6 +182,36 @@
   </div>
 
   <div class="b-example-divider"></div>
+
+  <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">
+    <a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+        <img src="images/ipear1.png" alt="iContacts Logo" width="70" height="40">
+        <span class="fs-5 fw-semibold">Add Contacts</span>
+    </a>
+    <div class="modal-body p-5 pt-5">
+        <form class="">
+        <div class="form-floating mb-3">
+            <input type="firstName" class="form-control rounded-4" id="firstName floatingInput" placeholder="First Name">
+            <label for="floatingInput">First Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="lastName" class="form-control rounded-4" id="lastName floatingInput" placeholder="Last Name">
+            <label for="floatingInput">Last Name</label>
+            </div>
+            <div class="form-floating mb-3">
+            <input type="email" class="form-control rounded-4" id="email floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email Address</label>
+            </div>
+        <div class="form-floating mb-3">
+            <input type="phone" class="form-control rounded-4" id="phone floatingPassword" placeholder="1234567890">
+            <label for="floatingInput">Phone Number</label>
+        </div>
+        <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" onclick="">Add Contact</button>
+        </form>
+    </div>
+</div>
+  
+
 </main>
 
 
