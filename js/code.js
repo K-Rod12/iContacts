@@ -108,7 +108,7 @@ function createAccount(){
 				var jsonObject = JSON.parse( xhr.responseText );
 
 
-				if(JSONObject.error == "This contact already exists."){
+				if(jsonObject.error == "This contact already exists."){
 					createAlert("This Contact Already Exists","danger",".errorBar")
 					return;
 				}
