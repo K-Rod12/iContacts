@@ -64,7 +64,7 @@ function doLogin()
 }
 
 
-function addAccount(){
+function createAccount(){
 
 	userId = 0;
 	
@@ -84,7 +84,7 @@ function addAccount(){
 //	var tmp = {login:login,password:hash};
 	var jsonPayload = JSON.stringify( tmp );
 	
-	var url = urlBase + '/AddContact.' + extension;
+	var url = urlBase + '/CreateAccount.' + extension;
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -105,7 +105,7 @@ function addAccount(){
 
 				console.log(jsonObject);
 	
-				window.location.href = "index.html";
+				//window.location.href = "index.html";
 
 			}
 		};
@@ -114,6 +114,7 @@ function addAccount(){
 	}
 	catch(err)
 	{
+		console.log("Don't want to hit here");
 		document.getElementById("loginResult").innerHTML = err.message;
 	}
 
