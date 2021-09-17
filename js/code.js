@@ -8,7 +8,6 @@ var lastName = "";
 
 function doLogin()
 {
-	userId = 0;
 	firstName = "";
 	lastName = "";
 	
@@ -62,8 +61,6 @@ function doLogin()
 }
 
 function addContact(){
-
-	userId = 0;
 	
 
 	var firstName = $("#firstName").val() // Gets the first name from register fields
@@ -124,9 +121,6 @@ function addContact(){
 
 
 function createAccount(){
-
-	userId = 0;
-	
 
 	var firstName = $("#firstName").val() // Gets the first name from register fields
 	var lastName = $("#lastName").val() //Gets the last name from register fields
