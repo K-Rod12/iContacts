@@ -365,7 +365,7 @@ function searchContacts()
 
 	var contactList = "";
 
-	//readCookie();
+	readCookie();
 	console.log(userId)
 	var tmp = {userId:userId, search:srch};
 	var jsonPayload = JSON.stringify( tmp );
