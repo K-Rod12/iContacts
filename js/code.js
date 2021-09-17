@@ -49,8 +49,6 @@ function doLogin()
 				saveCookie();
 	
 				window.location.href = "contacts.html";
-
-				$('.dropdown-toggle').append(login)
 			}
 		};
 		console.log(jsonPayload);
@@ -115,13 +113,13 @@ function createAccount(){
 
 				//console.log(jsonPayload);
 	
-				window.location.href = "index.html";
+				//window.location.href = "index.html";
 
 			}
 		};
 		console.log(jsonPayload);
 		xhr.send(jsonPayload);
-		console.log('Succes?')
+		console.log('Success?')
 	}
 	catch(err)
 	{
