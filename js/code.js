@@ -72,7 +72,7 @@ function addContact(){
 	// var password = document.getElementById("password").value;
 	//	var hash = md5( password );
 	
-
+	readCookie();
 
 	var tmp = {userId:userId,FirstName:firstName,LastName:lastName,Email:email,PhoneNumber:phoneNumber};
 
