@@ -27,15 +27,7 @@
 				$searchResults .= ",";
 			}
 
-			// the line below is the info that needs to be passed as JSON
-			//$searchResults .= '"'.$row["FirstName"].','.$row["LastName"].','.$row["Email"].','.$row["PhoneNumber"].'"';
-
-			// line below CAN be parsed as JSON
 			$searchResults .= '{"FirstName":"'.$row["FirstName"].'","LastName":"'.$row["LastName"].'","PhoneNumber":"'.$row["PhoneNumber"].'","Email":"'.$row["Email"].'"}';
-
-			// And with Email included in the line below, we CANNOT parse the results as JSON
-			//$searchResults .= '{"FirstName":"'.$row["FirstName"].'","LastName":"'.$row["LastName"].'","Email":"'.$row["Email"].'"}';
-
 			$searchCount++;
 		}//end while
 
@@ -60,9 +52,7 @@
 	function sendResultInfoAsJson( $obj )
 	{
 		header('Content-type: application/json');
-		// This line below supposedly returns a valid json string
-		$res = json_encode($obj);
-		echo $res;
+		echo $obj;
 	}
 
 	function returnWithError( $err )
