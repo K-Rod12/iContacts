@@ -10,6 +10,7 @@
     <script type="text/javascript" src="js/md5.js"></script>
     <script type = "text/javascript" src = "js/code.js"></script>
     <!-- <link rel = "stylesheet" href = "css/styles.css"> -->
+    <link rel="icon" href="images/favicon.webp"> 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
     
     
@@ -42,9 +43,9 @@
     <main class="form-signin">
         <h1 id = "title">iContacts</h1>
         <form>
-            <img class="mb-4" src="images/ipear1.png" alt="" width="90" height="57">
+            <img class="mb-4" src="images/ipear1.webp" alt="" width="192" height="108">
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
+            <span id="loginResult" style="color:red;font-weight:bold"></span>
             <div class="form-floating">
                 <input type="text" class="form-control" id="loginName" placeholder="Username">
                 <label for="text">Username</label>
@@ -63,7 +64,6 @@
             <p></p>
             <button class="w-100 btn btn-lg btn-secondary" type="button" onclick="window.location.href = 'createAccount.html';">Create Account</button>
             <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
-            <span id="loginResult"></span>
             <p id="searchText"></p>
         </form>
     </main>
