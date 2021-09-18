@@ -61,6 +61,105 @@ function doLogin()
 
 }
 
+// function displayContact()
+// {
+
+// }
+
+function editContact()
+{
+	var str = "";
+
+	//document.getElementById("contactFirstName").innerHTML = "";
+	var srch = document.getElementById("searchText").value;
+	console.log(srch);
+	//document.getElementById("colorSearchResult").innerHTML = "";
+	
+	var searchContacts = "";
+
+	var contactList = "";
+
+	readCookie();
+	console.log(userId)
+	var tmp = {userId:userId, search:srch};
+	var jsonPayload = JSON.stringify( tmp );
+
+	var url = urlBase + '/SearchContacts.' + extension;
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				//document.getElementById("contactSearchResult").innerHTML = "Color(s) has been retrieved";
+				var jsonObject = JSON.parse( xhr.responseText );
+				console.log(jsonObject)
+				
+				// for( var i=0; i<jsonObject.results.length; i++ )
+				// {
+					// contactList += jsonObject.results[i];
+					// if( i < jsonObject.results.length - 1 )
+					// {
+					// 	contactList += "<br />\r\n";
+					// }
+
+					str += '<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">' +
+					'<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">'+
+						'<img src="images/ipear1.webp" alt="iContacts Logo" width="70" height="40">'+
+						'<span class="fs-5 fw-semibold">Edit Contact</span>'+
+					'</a>'+
+					'<div class="modal-body p-5 pt-5">'+
+						'<form class="">'+
+						'<div class="form-floating mb-3">'+
+							'<input type="firstName" class="form-control rounded-4" id="firstName" placeholder="' + jsonObject.results[0].FirstName +'">'+
+							'<label for="floatingInput">' + jsonObject.results[0].FirstName +'</label>'+
+						'</div>'+
+						'<div class="form-floating mb-3">'+
+							'<input type="lastName" class="form-control rounded-4" id="lastName" placeholder="' + jsonObject.results[0].LastName +'">'+
+							'<label for="floatingInput">' + jsonObject.results[0].LastName +'</label>'+
+							'</div>'+
+							'<div class="form-floating mb-3">'+
+							'<input type="email" class="form-control rounded-4" id="email" placeholder="' + jsonObject.results[0].Email +'">'+
+							'<label for="floatingInput">' + jsonObject.results[0].Email +'</label>'+
+							'</div>'+
+						'<div class="form-floating mb-3">'+
+							'<input type="phone" class="form-control rounded-4" id="phone" placeholder="' + jsonObject.results[0].PhoneNumber +'">'+
+							'<label for="floatingInput">' + jsonObject.results[0].PhoneNumber +'</label>'+
+						'</div>' +
+						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="">Edit Contact</button>'+
+						'</form>'+
+					'</div>' +
+					'</div>'
+					$('#add').empty();
+					$('#add').append(str);
+				//}
+
+				
+				//$('#contactList').append(contactList);
+				
+				//$('#contactList').empty();
+				//$('#contactList').append(contactList);
+				
+				//document.getElementsByTagName("p")[0].innerHTML = colorList;
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactSearchResult").innerHTML = err.message;
+	}
+
+    
+	
+   
+	
+}
 
 function deleteContact(){
 
@@ -400,12 +499,10 @@ function searchContacts()
 					// 	contactList += "<br />\r\n";
 					// }
 
-					contactList = contactList + '<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">'
+					contactList = contactList + '<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true" onclick="editContact()">'
 					+'<div class="d-flex w-100 align-items-center justify-content-between">'
-					+'<strong class="mb-1">' + jsonObject.results[i].FirstName + '</strong>'
-					+'<small>Wed</small>'
+					+'<strong id = "contactFirstName" class="mb-1">' + jsonObject.results[i].FirstName + ' ' + jsonObject.results[i].LastName + '</strong>'
 					+'</div>'
-					+'<div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>'
 					+'</a>'
 				}
 
