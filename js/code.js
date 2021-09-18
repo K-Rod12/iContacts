@@ -109,8 +109,7 @@ function editContact()
 					// }
 
 					str += '<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">' +
-					'<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">'+
-						'<img src="images/ipear1.webp" alt="iContacts Logo" width="70" height="40">'+
+					'<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom align-self-center">'+
 						'<span class="fs-5 fw-semibold">Edit Contact</span>'+
 					'</a>'+
 					'<div class="modal-body p-5 pt-5">'+
@@ -183,7 +182,7 @@ function deleteContact(){
 	var jsonPayload = JSON.stringify( tmp );
 	console.log(jsonPayload)
 	
-	var url = urlBase + '/AddContact.' + extension;
+	var url = urlBase + '/DeleteContact.' + extension;
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -414,8 +413,7 @@ function addContactOnClick()
     var str = "";
 
     str += '<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">' +
-      '<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">'+
-          '<img src="images/ipear1.webp" alt="iContacts Logo" width="70" height="40">'+
+      '<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom align-self-center">'+
           '<span class="fs-5 fw-semibold">Add Contacts</span>'+
       '</a>'+
       '<div class="modal-body p-5 pt-5">'+
@@ -503,6 +501,7 @@ function searchContacts()
 					+'<div class="d-flex w-100 align-items-center justify-content-between">'
 					+'<strong id = "contactFirstName" class="mb-1">' + jsonObject.results[i].FirstName + ' ' + jsonObject.results[i].LastName + '</strong>'
 					+'</div>'
+					+ '<div class="col-10 mb-1 small">' + jsonObject.results[i].PhoneNumber +'</div>'
 					+'</a>'
 				}
 
