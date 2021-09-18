@@ -163,7 +163,8 @@ function addContact(){
 
 				//console.log(jsonPayload);
 
-
+				$('contactList').empty();
+				searchContacts();
 			}
 		};
 		console.log(jsonPayload);
@@ -315,7 +316,7 @@ function addContactOnClick()
 
     str += '<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">' +
       '<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">'+
-          '<img src="images/ipear1.png" alt="iContacts Logo" width="70" height="40">'+
+          '<img src="images/ipear1.webp" alt="iContacts Logo" width="70" height="40">'+
           '<span class="fs-5 fw-semibold">Add Contacts</span>'+
       '</a>'+
       '<div class="modal-body p-5 pt-5">'+
@@ -336,7 +337,7 @@ function addContactOnClick()
               '<input type="phone" class="form-control rounded-4" id="phone" placeholder="1234567890">'+
               '<label for="floatingInput">Phone Number</label>'+
           '</div>' +
-          '<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="addContact()">Add Contact</button>'+
+          '<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="addContact();">Add Contact</button>'+
           '</form>'+
       '</div>' +
       '</div>'
@@ -344,6 +345,7 @@ function addContactOnClick()
 	
     $('#add').empty();
     $('#add').append(str);
+	
 }
 
 
