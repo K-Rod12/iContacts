@@ -1,8 +1,7 @@
-// this is an easy search, get the unique contact ID, return information
 <?php
 
   $inData = getRequestInfo();
-  $contactID = $inData["ContactID"];
+  $contactID = $inData["ID"];
   $searchResults = "";
 
   $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -18,8 +17,11 @@
 
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-    $contactInfo .= '{"firstName":"'.$row["firstName"].'","LastName":"'.$row["lastName"].'","PhoneNumber":"'.$row["PhoneNumber"].'","Email":"'.$row["Email"].'"}';
+    $contactInfo .= '{"firstName":"'.$row["FirstName"].'","LastName":"'.$row["LastName"].'","PhoneNumber":"'.$row["PhoneNumber"].'","Email":"'.$row["Email"].'"}';
     sendResultInfoAsJson($contactInfo);
+
+    $stmt->close();
+    $conn->close();
 
   }// end else
 
