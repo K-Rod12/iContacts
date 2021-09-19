@@ -6,6 +6,7 @@ var flag = 0;
 var userId = 0;
 var firstName = "";
 var lastName = "";
+var contactNum = 0;
 
 var contacts = [];
 
@@ -115,8 +116,9 @@ function showContact(cid){
 							'<label for="floatingInput">Phone Number</label>'+
 						'</div>' +
 						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="editContact(' + cid + ')">Edit Contact</button>'+
-						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="deleteContact(' + cid + '); searchContacts();">Delete Contact</button>'+
+						'<button class="w-100 mb-2 btn btn-lg rounded-4 delete-btn" type="button" onclick="deleteContact(' + cid + '); searchContacts();">Delete Contact</button>'+
 						'</form>'+
+						
 					'</div>' +
 					'</div>'
 
@@ -215,6 +217,8 @@ function deleteContact(cid){
 					var jsonObject = JSON.parse( xhr.responseText );
 					console.log(jsonObject)
 
+					window.location.href = "contacts.html";
+
 					$('#add').empty();
 					searchContacts();
 				}
@@ -250,10 +254,10 @@ function addContact(){
 	var tmp = {FirstName:firstName,LastName:lastName,Email:email,PhoneNumber:phoneNumber,userId:userId};
 
 
-
+	console.log('You are in add contact!')
 //	var tmp = {login:login,password:hash};
 	var jsonPayload = JSON.stringify( tmp );
-	console.log(jsonPayload)
+	//console.log(jsonPayload)
 	
 	var url = urlBase + '/AddContact.' + extension;
 
@@ -275,10 +279,13 @@ function addContact(){
 				}
 
 
+				window.location.href = "contacts.html";
 				$('contactList').empty();
 				searchContacts();
 			}
 		};
+		xhr.send(jsonPayload);
+
 	}
 	catch(err)
 	{
@@ -494,6 +501,8 @@ function searchContacts()
 				//document.getElementById("contactSearchResult").innerHTML = "Color(s) has been retrieved";
 				var jsonObject = JSON.parse( xhr.responseText );
 				console.log(jsonObject)
+
+				contactNum = jsonObject.results.length;
 				
 				for( var i=0; i<jsonObject.results.length; i++ )
 				{
