@@ -93,9 +93,8 @@ function showContact(cid){
 				console.log(jsonObject)
 
 					contactInfo += '<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">' +
-					'<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">'+
-						'<img src="images/ipear1.webp" alt="iContacts Logo" width="70" height="40">'+
-						'<span class="fs-5 fw-semibold">Edit Contact</span>'+
+					'<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom align-self-center">'+
+						'<span class="fs-5 fw-semibold">Contact Info</span>'+
 					'</a>'+
 					'<div class="modal-body p-5 pt-5">'+
 						'<form class="">'+
@@ -116,6 +115,7 @@ function showContact(cid){
 							'<label for="floatingInput">Phone Number</label>'+
 						'</div>' +
 						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="editContact(' + cid + ')">Edit Contact</button>'+
+						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="deleteContact(' + cid + '); searchContacts();">Delete Contact</button>'+
 						'</form>'+
 					'</div>' +
 					'</div>'
@@ -185,50 +185,51 @@ function editContact(cid )
 	
 }
 
-function deleteContact(){
+function deleteContact(cid){
 
-	var firstName = $("#firstName").val() // Gets the first name from register fields
-	var lastName = $("#lastName").val() //Gets the last name from register fields
-	var email = $("#email").val() //gets the username from register fields
-   	var phoneNumber =  $("#phone").val() //gets the password from register field
-	
-	readCookie();
-
-	var tmp = {userId:userId,FirstName:firstName,LastName:lastName,Email:email,PhoneNumber:phoneNumber};
-
-	console.log('hit here')
-
-//	var tmp = {login:login,password:hash};
-	var jsonPayload = JSON.stringify( tmp );
-	console.log(jsonPayload)
-	
-	var url = urlBase + '/AddContact.' + extension;
-
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
+	if (window.confirm("Do you really want to delete this contact?"))
 	{
-		xhr.onreadystatechange = function() 
+		var contactInfo = "";
+
+		console.log(cid)
+
+		readCookie();
+
+		console.log(contacts[cid])
+		var tmp = {ID:contacts[cid]};
+		var jsonPayload = JSON.stringify( tmp );
+
+		var url = urlBase + '/DeleteContact.' + extension;
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+		try
 		{
-			if (this.readyState == 4 && this.status == 200) 
+			xhr.onreadystatechange = function() 
 			{
-				var jsonObject = JSON.parse( xhr.responseText );
+				if (this.readyState == 4 && this.status == 200) 
+				{
+					//document.getElementById("contactSearchResult").innerHTML = "Color(s) has been retrieved";
+					var jsonObject = JSON.parse( xhr.responseText );
+					console.log(jsonObject)
 
-
-				if(jsonObject.error == "This contact already exists."){
-					createAlert("This Contact Already Exists","danger",".errorBar")
-					return;
+					$('#add').empty();
+					searchContacts();
 				}
-
-
-			}
-		};
+			};
+			xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
-		document.getElementById("loginResult").innerHTML = err.message;
+		document.getElementById("contactSearchResult").innerHTML = err.message;
 	}
+
+	}
+	else
+		return;
+	
 
 }
 
@@ -246,7 +247,7 @@ function addContact(){
 	
 	readCookie();
 
-	var tmp = {userId:userId,FirstName:firstName,LastName:lastName,Email:email,PhoneNumber:phoneNumber};
+	var tmp = {FirstName:firstName,LastName:lastName,Email:email,PhoneNumber:phoneNumber,userId:userId};
 
 
 
@@ -418,32 +419,31 @@ function addContactOnClick()
     var str = "";
 
     str += '<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">' +
-      '<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">'+
-          '<img src="images/ipear1.webp" alt="iContacts Logo" width="70" height="40">'+
-          '<span class="fs-5 fw-semibold">Add Contacts</span>'+
-      '</a>'+
-      '<div class="modal-body p-5 pt-5">'+
-          '<form class="">'+
-          '<div class="form-floating mb-3">'+
-              '<input type="firstName" class="form-control rounded-4" id="firstName" placeholder="First Name">'+
-              '<label for="floatingInput">First Name</label>'+
-          '</div>'+
-          '<div class="form-floating mb-3">'+
-              '<input type="lastName" class="form-control rounded-4" id="lastName" placeholder="Last Name">'+
-              '<label for="floatingInput">Last Name</label>'+
-              '</div>'+
-              '<div class="form-floating mb-3">'+
-              '<input type="email" class="form-control rounded-4" id="email" placeholder="name@example.com">'+
-              '<label for="floatingInput">Email Address</label>'+
-              '</div>'+
-          '<div class="form-floating mb-3">'+
-              '<input type="phone" class="form-control rounded-4" id="phone" placeholder="1234567890">'+
-              '<label for="floatingInput">Phone Number</label>'+
-          '</div>' +
-          '<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="addContact();">Add Contact</button>'+
-          '</form>'+
-      '</div>' +
-      '</div>'
+				'<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom align-self-center">'+
+					'<span class="fs-5 fw-semibold">Add Contacts</span>'+
+				'</a>'+
+				'<div class="modal-body p-5 pt-5">'+
+					'<form class="">'+
+					'<div class="form-floating mb-3">'+
+						'<input type="firstName" class="form-control rounded-4" id="firstName" placeholder="First Name">'+
+						'<label for="floatingInput">First Name</label>'+
+					'</div>'+
+					'<div class="form-floating mb-3">'+
+						'<input type="lastName" class="form-control rounded-4" id="lastName" placeholder="Last Name">'+
+						'<label for="floatingInput">Last Name</label>'+
+						'</div>'+
+						'<div class="form-floating mb-3">'+
+						'<input type="email" class="form-control rounded-4" id="email" placeholder="name@example.com">'+
+						'<label for="floatingInput">Email Address</label>'+
+						'</div>'+
+					'<div class="form-floating mb-3">'+
+						'<input type="phone" class="form-control rounded-4" id="phone" placeholder="1234567890">'+
+						'<label for="floatingInput">Phone Number</label>'+
+					'</div>' +
+					'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="addContact();">Add Contact</button>'+
+					'</form>'+
+				'</div>' +
+			'</div>'
 
 	
     $('#add').empty();
@@ -510,7 +510,6 @@ function searchContacts()
 				//$('#contactList').append(contactList);
 				$('#contactList').empty();
 				$('#contactList').append(contactList);
-				flag++;
 				//document.getElementsByTagName("p")[0].innerHTML = colorList;
 			}
 		};
