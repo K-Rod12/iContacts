@@ -7,6 +7,8 @@ var userId = 0;
 var firstName = "";
 var lastName = "";
 
+var contacts = [];
+
 function doLogin()
 {
 	firstName = "";
@@ -41,10 +43,6 @@ function doLogin()
 					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 					return;
 				}
-		
-				firstName = jsonObject.firstName;
-				lastName = jsonObject.lastName;
-				console.log(jsonObject);
 
 				saveCookie();
 	
@@ -66,9 +64,9 @@ function doLogin()
 
 // }
 
-function editContact()
-{
-	var str = "";
+function showContact(cid){
+
+	var contactInfo = "";
 
 	//document.getElementById("contactFirstName").innerHTML = "";
 	var srch = document.getElementById("searchText").value;
@@ -80,11 +78,11 @@ function editContact()
 	var contactList = "";
 
 	readCookie();
-	console.log(userId)
-	var tmp = {userId:userId, search:srch};
+
+	var tmp = {ID:contacts[cid]};
 	var jsonPayload = JSON.stringify( tmp );
 
-	var url = urlBase + '/SearchContacts.' + extension;
+	var url = urlBase + '/ShowContact.' + extension;
 	
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -99,52 +97,85 @@ function editContact()
 				//document.getElementById("contactSearchResult").innerHTML = "Color(s) has been retrieved";
 				var jsonObject = JSON.parse( xhr.responseText );
 				console.log(jsonObject)
-				
-				// for( var i=0; i<jsonObject.results.length; i++ )
-				// {
-					// contactList += jsonObject.results[i];
-					// if( i < jsonObject.results.length - 1 )
-					// {
-					// 	contactList += "<br />\r\n";
-					// }
 
-					str += '<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">' +
-					'<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom align-self-center">'+
+					contactInfo += '<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">' +
+					'<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">'+
+						'<img src="images/ipear1.webp" alt="iContacts Logo" width="70" height="40">'+
 						'<span class="fs-5 fw-semibold">Edit Contact</span>'+
 					'</a>'+
 					'<div class="modal-body p-5 pt-5">'+
 						'<form class="">'+
 						'<div class="form-floating mb-3">'+
-							'<input type="firstName" class="form-control rounded-4" id="firstName" placeholder="' + jsonObject.results[0].FirstName +'">'+
-							'<label for="floatingInput">' + jsonObject.results[0].FirstName +'</label>'+
+							'<input type="firstName" class="form-control rounded-4" id="firstName" value="' + jsonObject.firstName +'">'+
+							'<label for="floatingInput">First Name</label>'+
 						'</div>'+
 						'<div class="form-floating mb-3">'+
-							'<input type="lastName" class="form-control rounded-4" id="lastName" placeholder="' + jsonObject.results[0].LastName +'">'+
-							'<label for="floatingInput">' + jsonObject.results[0].LastName +'</label>'+
+							'<input type="lastName" class="form-control rounded-4" id="lastName" value="' + jsonObject.LastName +'">'+
+							'<label for="floatingInput">Last Name</label>'+
 							'</div>'+
 							'<div class="form-floating mb-3">'+
-							'<input type="email" class="form-control rounded-4" id="email" placeholder="' + jsonObject.results[0].Email +'">'+
-							'<label for="floatingInput">' + jsonObject.results[0].Email +'</label>'+
+							'<input type="email" class="form-control rounded-4" id="email" value="' + jsonObject.Email +'">'+
+							'<label for="floatingInput">Email</label>'+
 							'</div>'+
 						'<div class="form-floating mb-3">'+
-							'<input type="phone" class="form-control rounded-4" id="phone" placeholder="' + jsonObject.results[0].PhoneNumber +'">'+
-							'<label for="floatingInput">' + jsonObject.results[0].PhoneNumber +'</label>'+
+							'<input type="phone" class="form-control rounded-4" id="phone" value="' + jsonObject.PhoneNumber +'">'+
+							'<label for="floatingInput">Phone Number</label>'+
 						'</div>' +
-						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="">Edit Contact</button>'+
+						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="editContact(' + cid + ')">Edit Contact</button>'+
 						'</form>'+
 					'</div>' +
 					'</div>'
-					$('#add').empty();
-					$('#add').append(str);
-				//}
 
-				
-				//$('#contactList').append(contactList);
-				
-				//$('#contactList').empty();
-				//$('#contactList').append(contactList);
-				
-				//document.getElementsByTagName("p")[0].innerHTML = colorList;
+					//document.getElementById("firstName").innerHTML = jsonObject.firstName;
+
+					$('#add').empty();
+					$('#add').append(contactInfo);
+
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactSearchResult").innerHTML = err.message;
+	}
+
+
+}
+
+function editContact(cid )
+{
+	var str = "";
+
+
+	readCookie();
+
+	var firstName = document.getElementById("firstName").value;
+	var lastName = document.getElementById("lastName").value;
+	var email = document.getElementById("email").value;
+	var phoneNumber = document.getElementById("phone").value;
+
+	var tmp = {userId:userId, ID:contacts[cid], NewFirst: firstName, NewLast: lastName, NewNumber: phoneNumber, NewEmail: email};
+	var jsonPayload = JSON.stringify( tmp );
+
+	var url = urlBase + '/EditContact.' + extension;
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				//document.getElementById("contactSearchResult").innerHTML = "Color(s) has been retrieved";
+				//var jsonObject = JSON.parse( xhr.responseText );
+				//console.log('you are in the try catch statement')
+
+				$('contactList').empty();
+				searchContacts();
 			}
 		};
 		xhr.send(jsonPayload);
@@ -166,11 +197,6 @@ function deleteContact(){
 	var lastName = $("#lastName").val() //Gets the last name from register fields
 	var email = $("#email").val() //gets the username from register fields
    	var phoneNumber =  $("#phone").val() //gets the password from register field
-	// var firstName = document.getElementById("firstName").value;
-	// var lastName = document.getElementById("lastName").value;
-	// var userName = document.getElementById("username").value;
-	// var password = document.getElementById("password").value;
-	//	var hash = md5( password );
 	
 	readCookie();
 
@@ -182,7 +208,7 @@ function deleteContact(){
 	var jsonPayload = JSON.stringify( tmp );
 	console.log(jsonPayload)
 	
-	var url = urlBase + '/DeleteContact.' + extension;
+	var url = urlBase + '/AddContact.' + extension;
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -413,7 +439,8 @@ function addContactOnClick()
     var str = "";
 
     str += '<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">' +
-      '<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom align-self-center">'+
+      '<a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">'+
+          '<img src="images/ipear1.webp" alt="iContacts Logo" width="70" height="40">'+
           '<span class="fs-5 fw-semibold">Add Contacts</span>'+
       '</a>'+
       '<div class="modal-body p-5 pt-5">'+
@@ -496,19 +523,16 @@ function searchContacts()
 					// {
 					// 	contactList += "<br />\r\n";
 					// }
-
-					contactList = contactList + '<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true" onclick="editContact()">'
+					contacts.push(jsonObject.results[i].id)
+					contactList = contactList + '<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true" onclick="showContact(' + i + ')">'
 					+'<div class="d-flex w-100 align-items-center justify-content-between">'
 					+'<strong id = "contactFirstName" class="mb-1">' + jsonObject.results[i].FirstName + ' ' + jsonObject.results[i].LastName + '</strong>'
 					+'</div>'
-					+ '<div class="col-10 mb-1 small">' + jsonObject.results[i].PhoneNumber +'</div>'
 					+'</a>'
 				}
 
 				
 				//$('#contactList').append(contactList);
-				if(flag >0  ){
-				}
 				$('#contactList').empty();
 				$('#contactList').append(contactList);
 				flag++;
