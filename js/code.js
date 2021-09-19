@@ -68,17 +68,11 @@ function showContact(cid){
 
 	var contactInfo = "";
 
-	//document.getElementById("contactFirstName").innerHTML = "";
-	var srch = document.getElementById("searchText").value;
-	console.log(srch);
-	//document.getElementById("colorSearchResult").innerHTML = "";
-	
-	var searchContacts = "";
-
-	var contactList = "";
+	console.log(cid)
 
 	readCookie();
 
+	console.log(contacts[cid])
 	var tmp = {ID:contacts[cid]};
 	var jsonPayload = JSON.stringify( tmp );
 
@@ -227,18 +221,12 @@ function deleteContact(){
 					return;
 				}
 
-				//console.log(jsonPayload);
-
 
 			}
 		};
-		console.log(jsonPayload);
-		xhr.send(jsonPayload);
-		console.log('Success?')
 	}
 	catch(err)
 	{
-		console.log("Don't want to hit here");
 		document.getElementById("loginResult").innerHTML = err.message;
 	}
 
@@ -260,7 +248,7 @@ function addContact(){
 
 	var tmp = {userId:userId,FirstName:firstName,LastName:lastName,Email:email,PhoneNumber:phoneNumber};
 
-	console.log('hit here')
+
 
 //	var tmp = {login:login,password:hash};
 	var jsonPayload = JSON.stringify( tmp );
@@ -285,19 +273,14 @@ function addContact(){
 					return;
 				}
 
-				//console.log(jsonPayload);
 
 				$('contactList').empty();
 				searchContacts();
 			}
 		};
-		console.log(jsonPayload);
-		xhr.send(jsonPayload);
-		console.log('Success?')
 	}
 	catch(err)
 	{
-		console.log("Don't want to hit here");
 		document.getElementById("loginResult").innerHTML = err.message;
 	}
 
@@ -325,8 +308,6 @@ function createAccount(){
 
 
 	var tmp = {FirstName:firstName,LastName:lastName, Login:userName, Password:password};
-
-	console.log('hit here')
 
 //	var tmp = {login:login,password:hash};
 	var jsonPayload = JSON.stringify( tmp );
@@ -421,8 +402,6 @@ function readCookie()
 			userId = parseInt( tokens[1].trim() );
 		}
 	}
-	
-	console.log(userId)
 
 	if( userId < 0 )
 	{
@@ -518,11 +497,7 @@ function searchContacts()
 				
 				for( var i=0; i<jsonObject.results.length; i++ )
 				{
-					// contactList += jsonObject.results[i];
-					// if( i < jsonObject.results.length - 1 )
-					// {
-					// 	contactList += "<br />\r\n";
-					// }
+
 					contacts.push(jsonObject.results[i].id)
 					contactList = contactList + '<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true" onclick="showContact(' + i + ')">'
 					+'<div class="d-flex w-100 align-items-center justify-content-between">'
