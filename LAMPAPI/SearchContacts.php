@@ -27,7 +27,7 @@
 				$searchResults .= ",";
 			}
 
-			$searchResults .= '{"FirstName":"'.$row["FirstName"].'","LastName":"'.$row["LastName"].'","PhoneNumber":"'.$row["PhoneNumber"].'","Email":"'.$row["Email"].'","id":"'.$row["id"]."}'";
+			$searchResults .= '{"id":"'.$row["id"].'","FirstName":"'.$row["FirstName"].'","LastName":"'.$row["LastName"].'","PhoneNumber":"'.$row["PhoneNumber"].'","Email":"'.$row["Email"].'"}';
 			$searchCount++;
 		}//end while
 
