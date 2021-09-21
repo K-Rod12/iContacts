@@ -6,7 +6,7 @@ var flag = 0;
 var userId = 0;
 var firstName = "";
 var lastName = "";
-var contactNum = 0;
+var userName = "";
 
 var contacts = [];
 
@@ -38,7 +38,6 @@ function doLogin()
 			{
 				var jsonObject = JSON.parse( xhr.responseText );
 				userId = jsonObject.id;
-		
 				if( userId < 1 )
 				{		
 					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
@@ -60,9 +59,13 @@ function doLogin()
 
 }
 
-// function displayContact()
+// function showUsername()
 // {
-
+// 	var str = "";
+// 	str += "" + localStorage.username + "";
+// 	console.log(localStorage.username);
+// 	$('userName').empty();
+// 	$('userName').append(str);
 // }
 
 function showContact(cid){
@@ -74,7 +77,7 @@ function showContact(cid){
 	readCookie();
 
 	console.log(contacts[cid])
-	var tmp = {ID:contacts[cid]};
+	var tmp = {ID:cid};
 	var jsonPayload = JSON.stringify( tmp );
 
 	var url = urlBase + '/ShowContact.' + extension;
@@ -116,9 +119,8 @@ function showContact(cid){
 							'<label for="floatingInput">Phone Number</label>'+
 						'</div>' +
 						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="editContact(' + cid + ')">Edit Contact</button>'+
-						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-danger" type="button" onclick="deleteContact(' + cid + '); searchContacts();">Delete Contact</button>'+
+						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-secondary" type="button" onclick="deleteContact(' + cid + '); searchContacts();">Delete Contact</button>'+
 						'</form>'+
-						
 					'</div>' +
 					'</div>'
 
@@ -126,6 +128,12 @@ function showContact(cid){
 
 					$('#add').empty();
 					$('#add').append(contactInfo);
+					if (flag == 0)
+					{
+						$('main').append('<div class="b-example-divider"></div>');
+						flag = 1;
+					}
+					
 
 			}
 		};
@@ -151,7 +159,7 @@ function editContact(cid )
 	var email = document.getElementById("email").value;
 	var phoneNumber = document.getElementById("phone").value;
 
-	var tmp = {userId:userId, ID:contacts[cid], NewFirst: firstName, NewLast: lastName, NewNumber: phoneNumber, NewEmail: email};
+	var tmp = {userId:userId, ID:cid, NewFirst: firstName, NewLast: lastName, NewNumber: phoneNumber, NewEmail: email};
 	var jsonPayload = JSON.stringify( tmp );
 
 	var url = urlBase + '/EditContact.' + extension;
@@ -169,7 +177,7 @@ function editContact(cid )
 				//document.getElementById("contactSearchResult").innerHTML = "Color(s) has been retrieved";
 				//var jsonObject = JSON.parse( xhr.responseText );
 				//console.log('you are in the try catch statement')
-
+				//window.location.href = "contacts.html";
 				$('contactList').empty();
 				searchContacts();
 			}
@@ -198,7 +206,7 @@ function deleteContact(cid){
 		readCookie();
 
 		console.log(contacts[cid])
-		var tmp = {ID:contacts[cid]};
+		var tmp = {ID:cid};
 		var jsonPayload = JSON.stringify( tmp );
 
 		var url = urlBase + '/DeleteContact.' + extension;
@@ -216,19 +224,18 @@ function deleteContact(cid){
 					//document.getElementById("contactSearchResult").innerHTML = "Color(s) has been retrieved";
 					var jsonObject = JSON.parse( xhr.responseText );
 					console.log(jsonObject)
-
 					window.location.href = "contacts.html";
-
 					$('#add').empty();
 					searchContacts();
 				}
 			};
 			xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("contactSearchResult").innerHTML = err.message;
-	}
+			
+		}
+		catch(err)
+		{
+			document.getElementById("contactSearchResult").innerHTML = err.message;
+		}
 
 	}
 	else
@@ -239,6 +246,7 @@ function deleteContact(cid){
 
 function addContact(){
 
+	console.log("here");
 	var firstName = $("#firstName").val() // Gets the first name from register fields
 	var lastName = $("#lastName").val() //Gets the last name from register fields
 	var email = $("#email").val() //gets the username from register fields
@@ -250,14 +258,14 @@ function addContact(){
 	//	var hash = md5( password );
 	
 	readCookie();
-
+	
 	var tmp = {FirstName:firstName,LastName:lastName,Email:email,PhoneNumber:phoneNumber,userId:userId};
 
 
-	console.log('You are in add contact!')
+
 //	var tmp = {login:login,password:hash};
 	var jsonPayload = JSON.stringify( tmp );
-	//console.log(jsonPayload)
+	console.log(jsonPayload)
 	
 	var url = urlBase + '/AddContact.' + extension;
 
@@ -278,14 +286,14 @@ function addContact(){
 					return;
 				}
 
-
 				window.location.href = "contacts.html";
 				$('contactList').empty();
 				searchContacts();
 			}
 		};
+		console.log(jsonPayload);
 		xhr.send(jsonPayload);
-
+		console.log('Success?');
 	}
 	catch(err)
 	{
@@ -350,7 +358,7 @@ function createAccount(){
 		};
 		console.log(jsonPayload);
 		xhr.send(jsonPayload);
-		console.log('Success?')
+		console.log('Success?');
 	}
 	catch(err)
 	{
@@ -360,25 +368,25 @@ function createAccount(){
 
 }
 
-function test()
-{	
-	var test = "";
+// function test()
+// {	
+// 	var test = "";
 
-	for(var i = 0; i < 10; i++){
+// 	for(var i = 0; i < 10; i++){
 
-		test  = test + '<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">'
-		+'<div class="d-flex w-100 align-items-center justify-content-between">'
-		+'<strong class="mb-1">List group item heading</strong>'
-		+'<small>Wed</small>'
-		+'</div>'
-		+'<div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>'
-		+'</a>'
-	}
+// 		test  = test + '<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">'
+// 		+'<div class="d-flex w-100 align-items-center justify-content-between">'
+// 		+'<strong class="mb-1">List group item heading</strong>'
+// 		+'<small>Wed</small>'
+// 		+'</div>'
+// 		+'<div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>'
+// 		+'</a>'
+// 	}
 
-	$('#contactList').empty();
-	$('#contactList').append(test);
-	//$('#contactList').modal('show')
-}
+// 	$('#contactList').empty();
+// 	$('#contactList').append(test);
+// 	//$('#contactList').modal('show')
+// }
 
 function saveCookie()
 {
@@ -455,7 +463,11 @@ function addContactOnClick()
 	
     $('#add').empty();
     $('#add').append(str);
-	
+	if (flag == 0)
+	{
+		$('main').append('<div class="b-example-divider"></div>');
+		flag = 1;
+	}
 }
 
 
@@ -501,14 +513,12 @@ function searchContacts()
 				//document.getElementById("contactSearchResult").innerHTML = "Color(s) has been retrieved";
 				var jsonObject = JSON.parse( xhr.responseText );
 				console.log(jsonObject)
-
-				contactNum = jsonObject.results.length;
 				
 				for( var i=0; i<jsonObject.results.length; i++ )
 				{
 
 					contacts.push(jsonObject.results[i].id)
-					contactList = contactList + '<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true" onclick="showContact(' + i + ')">'
+					contactList = contactList + '<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true" onclick="showContact(' + jsonObject.results[i].id + ')">'
 					+'<div class="d-flex w-100 align-items-center justify-content-between">'
 					+'<strong id = "contactFirstName" class="mb-1">' + jsonObject.results[i].FirstName + ' ' + jsonObject.results[i].LastName + '</strong>'
 					+'</div>'
