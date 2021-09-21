@@ -119,7 +119,7 @@ function showContact(cid){
 							'<label for="floatingInput">Phone Number</label>'+
 						'</div>' +
 						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="button" onclick="editContact(' + cid + ')">Edit Contact</button>'+
-						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-secondary" type="button" onclick="deleteContact(' + cid + '); searchContacts();">Delete Contact</button>'+
+						'<button class="w-100 mb-2 btn btn-lg rounded-4 btn-danger" type="button" onclick="deleteContact(' + cid + '); searchContacts();">Delete Contact</button>'+
 						'</form>'+
 					'</div>' +
 					'</div>'
